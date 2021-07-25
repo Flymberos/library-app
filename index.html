@@ -12,6 +12,7 @@
 
     <h1 class="title">My Library</h1>
 
+
     <div class="book-container">
         <div class="add-book-card">+</div>
     </div>
@@ -20,11 +21,11 @@
         <div id="background-blur"></div>
         <div id="modal" class="modal-content">
             <img class="close-modal" src="/pics/closeModal.png" alt="Close modal icon">
-            <h1>Add new Book</h1>
+            <h1 class="card-title">Add new Book</h1>
             <form>
-                <input name="title" type="text" placeholder="Title" required>
-                <input name="author" type="text" placeholder="Author" required>
-                <input name="pages" type="number" placeholder="Pages" required>
+                <input name="title" type="text" placeholder="Title" maxlength="30" required>
+                <input name="author" type="text" placeholder="Author" maxlength="30" required>
+                <input name="pages" type="number" placeholder="Pages" maxlength="4" required>
                 <div class="form-div">
                     <label>Read?</label>
                     <input name="read" type="checkbox">

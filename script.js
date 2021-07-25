@@ -49,7 +49,12 @@ addBookButton.addEventListener("click", () => {
             cardBeingEdited.childNodes[0].textContent = bookBeingEdited.title;
             cardBeingEdited.childNodes[1].textContent = bookBeingEdited.author;
             cardBeingEdited.childNodes[2].textContent = bookBeingEdited.totalPages;
-            cardBeingEdited.childNodes[3].textContent = bookBeingEdited.read;
+
+            if(bookBeingEdited.read === true){
+                cardBeingEdited.childNodes[3].textContent = "Read";
+            }else{
+                cardBeingEdited.childNodes[3].textContent = "Not Read";
+            }
 
             closeModal();
             addBookButton.textContent = "Add";
@@ -58,6 +63,7 @@ addBookButton.addEventListener("click", () => {
             clearFields();
             let newBook = new Book(title, author, pages, read);
             myLibrary.push(newBook);
+            localStorage.cachedLibrary = JSON.stringify(myLibrary);
             addNewBook(newBook);
     }
 });
@@ -91,7 +97,13 @@ let addNewBook = (book) => {
         title.textContent = book.title;
         author.textContent = book.author;
         pages.textContent = book.totalPages;
-        read.textContent = book.read;
+
+        if(book.read === true){
+            read.textContent = "Read";
+        }else{
+            read.textContent = "Not Read";
+        }
+
         editButton.textContent = "Edit";
         deleteButton.textContent = "Delete";
 
@@ -108,6 +120,7 @@ let addNewBook = (book) => {
 
         deleteButton.addEventListener("click", () => {
             bookContainer.removeChild(card);
+            clearFields();
         });
 
         editButton.addEventListener("click", () => {
@@ -135,7 +148,7 @@ let addNewBook = (book) => {
 }
 
 
-let clearFields = () =>{
+let clearFields = () => {
 
     inputFields.forEach( field => {
         if(field.getAttribute("name") == "read"){
@@ -144,6 +157,10 @@ let clearFields = () =>{
         field.value = "";
     });
 
+}
+
+if(localStorage.getItem('cachedLibrary') !== null){
+    myLibrary = JSON.parse(localStorage.getItem('cachedLibrary'));
 }
 
 showBooks();
